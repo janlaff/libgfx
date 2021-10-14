@@ -2,12 +2,9 @@
 
 #include <memory>
 
-#include "GLInclude.h"
+#include "GLFixedIncludes.h"
 
 namespace gfx {
-    class Context;
-    class InputBindings;
-
     class Window {
     public:
         Window(const Window&) = delete;
@@ -16,19 +13,17 @@ namespace gfx {
 
         void Update();
         bool IsOpen();
-        InputBindings GetInputBindings();
+
+        static Window Create(int width, int height, const std::string &title, bool fullscreen);
 
     private:
-        friend class Context;
-        friend class InputBindings;
+        Window(GLFWwindow* window, GLFWmonitor* monitor);
 
-        Window(int width, int height, const std::string &title, bool fullscreen);
-
-        void SetMonitor(bool fullscreen);
-        void SetSettings();
-        void Open(int width, int height, const std::string& title);
-        void ClaimContext();
-        GLFWwindow* GetHandle();
+        static void InitGlfw(int glMajorVersion, int glMinorVersion);
+        static void InitGlew();
+        static GLFWmonitor* GetMonitor(bool fullscreen);
+        static GLFWwindow* OpenWindow(int width, int height, const std::string &title, GLFWmonitor* monitor);
+        static void ClaimGLContext(GLFWwindow* window);
 
         GLFWwindow* m_windowHandle;
         GLFWmonitor* m_monitorHandle;
