@@ -34,7 +34,12 @@ constexpr auto& get(StorageType& storage) {
     return static_cast<storage_type&>(storage).value;
 }
 
+template<typename Component, typename StorageType>
+constexpr auto& get_component(StorageType& storage, unsigned int n) {
+    return get<Component>(storage).at(n);
+}
+
 int main() {
     Storage<10, int, float> storage{};
-    return get<int>(storage).at(0);
+    return get_component<int>(storage, 0);
 }
