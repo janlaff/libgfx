@@ -41,4 +41,9 @@ namespace util {
         using array_storage_type = typename ArrayStorageElement<ComponentType, ArrayStorageType>::array_storage_type;
         return static_cast<array_storage_type&>(arrayStorage).array;
     }
+
+    template<typename ComponentType, typename ArrayStorageType>
+    constexpr auto& GetArrayComponent(ArrayStorageType& arrayStorage, size_t index) {
+        return GetArray<ComponentType>(arrayStorage)[index];
+    }
 }
