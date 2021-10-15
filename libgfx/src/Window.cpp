@@ -31,7 +31,6 @@ namespace gfx {
         InitGlfw(4, 4);
         auto monitor = GetMonitor(fullscreen);
         auto window = OpenWindow(width, height, title, monitor);
-        ClaimGLContext(window);
         InitGlew();
 
         return {window, monitor};
@@ -56,10 +55,10 @@ namespace gfx {
     GLFWwindow* Window::OpenWindow(int width, int height, const std::string &title, GLFWmonitor* monitor) {
         GLFWwindow* window = glfwCreateWindow(width, height, title.c_str(), monitor, nullptr);
         ThrowIfNull(window, "Failed to create GLFW window");
-        glfwSetInputMode(window, GLFW_STICKY_KEYS, true);
-    }
 
-    void Window::ClaimGLContext(GLFWwindow *window) {
+        glfwSetInputMode(window, GLFW_STICKY_KEYS, true);
         glfwMakeContextCurrent(window);
+
+        return window;
     }
 }

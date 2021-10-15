@@ -19,11 +19,11 @@ namespace gfx {
     private:
         Window(GLFWwindow* window, GLFWmonitor* monitor);
 
-        static void InitGlfw(int glMajorVersion, int glMinorVersion);
-        static void InitGlew();
+        // Initialization functions
+        static void         InitGlfw(int glMajorVersion, int glMinorVersion);
+        static void         InitGlew();
         static GLFWmonitor* GetMonitor(bool fullscreen);
-        static GLFWwindow* OpenWindow(int width, int height, const std::string &title, GLFWmonitor* monitor);
-        static void ClaimGLContext(GLFWwindow* window);
+        static GLFWwindow*  OpenWindow(int width, int height, const std::string &title, GLFWmonitor* monitor);
 
         GLFWwindow* m_windowHandle;
         GLFWmonitor* m_monitorHandle;
